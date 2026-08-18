@@ -1,0 +1,13 @@
+Resize: 
+1. PowerShell
+Get-ChildItem -Path "$env:USERPROFILE\AppData\Local\Packages" -Filter "ext4.vhdx" -Recurse
+
+2. diskpart
+select vdisk file="C:\Users\<UserName>\AppData\Local\Packages\<Packege>\LocalState\ext4.vhdx"
+expand vdisk maximum=200000
+detach vdisk
+exit
+
+3. wsl 
+df -h
+resize2fs /dev/sdd
