@@ -155,6 +155,8 @@ docker system prune -a -f &&
 docker container prune -f && 
 docker volume prune -a -f && 
 docker builder prune -a -f
+
+docker volume rm $(docker volume ls -q)
 ---
 docker image prune -a -f
 docker-compose logs -f
