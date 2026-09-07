@@ -1,0 +1,30 @@
+curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+
+sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+
+rm argocd-linux-amd64
+
+argocd version --client
+
+argocd login argocd-server.argocd.svc.cluster.local --insecure
+
+argocd login 10.43.33.239 --insecure
+
+gitlab-repo-secret.yaml
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: gitlab-repo-secret
+  namespace: <namespace_argo>
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: git
+  url: https://git<repos>
+  username: argocd-pull
+  password: glpat-<token>
+
+k apply -f .
+
+argocd repo list
