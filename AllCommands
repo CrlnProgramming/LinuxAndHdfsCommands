@@ -147,6 +147,7 @@ docker network ls
 docker exec -it <id> sh 
 docker system prune -a
 docker stop $(docker ps -q -a)
+docker save -o mailpit.tar image:tag
 ---
 docker build --no-cache -t "nameservice" .
 docker run -it --entrypoint /bin/sh "nameservice"
